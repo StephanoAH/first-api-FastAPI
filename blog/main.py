@@ -126,7 +126,12 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-@app.get("/user", status_code=status.HTTP_200_OK, tags=["Users"])
+@app.get(
+    "/user",
+    response_model=List[schemas.User],
+    status_code=status.HTTP_200_OK,
+    tags=["Users"],
+)
 def get_all_users(db: Session = Depends(get_db)):
     users = db.query(models.User).all()
     if not users:
