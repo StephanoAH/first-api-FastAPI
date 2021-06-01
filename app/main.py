@@ -2,20 +2,13 @@ from typing import List
 from fastapi import FastAPI, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from . import schemas, models, database
+from .database import get_db
 from .hashing import bcrypt
 
 
 app = FastAPI()
 
 models.Base.metadata.create_all(database.engine)
-
-
-def get_db():
-    db = database.SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 tags_metadata = [{"name": "Posts"}, {"name": "Users"}]

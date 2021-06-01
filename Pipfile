@@ -11,6 +11,7 @@ sqlalchemy = "*"
 email-validator = "*"
 passlib = "*"
 bcrypt = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
