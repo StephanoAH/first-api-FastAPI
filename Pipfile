@@ -7,6 +7,10 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 black = "==21.5b1"
+sqlalchemy = "*"
+email-validator = "*"
+passlib = "*"
+bcrypt = "*"
 
 [dev-packages]
 
