@@ -2,6 +2,12 @@ from typing import List, Optional
 from datetime import date
 from pydantic import BaseModel, EmailStr
 
+#########################################
+#                                       #
+#                 Posts                 #
+#                                       #
+#########################################
+
 
 class PostBase(BaseModel):
     title: str
@@ -23,6 +29,13 @@ class PostUpdate(BaseModel):
         orm_mode = True
 
 
+#########################################
+#                                       #
+#                 Users                 #
+#                                       #
+#########################################
+
+
 class UserBase(BaseModel):
     first_name: str
     last_name: str
@@ -32,11 +45,33 @@ class UserBase(BaseModel):
         orm_mode = True
 
 
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+
 class UserCreate(UserBase):
     password: str
 
     class Config:
         orm_mode = True
+
+
+class UserUpdate(BaseModel):
+    first_name: Optional[str]
+    last_name: Optional[str]
+    email: Optional[EmailStr]
+    password: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+
+#########################################
+#                                       #
+#             Relationships             #
+#                                       #
+#########################################
 
 
 class User(UserBase):
@@ -49,16 +84,6 @@ class Post(PostBase):
     created: date
     updated: date
     author: UserBase
-
-    class Config:
-        orm_mode = True
-
-
-class UserUpdate(BaseModel):
-    first_name: Optional[str]
-    last_name: Optional[str]
-    email: Optional[EmailStr]
-    password: Optional[str]
 
     class Config:
         orm_mode = True

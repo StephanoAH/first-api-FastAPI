@@ -8,7 +8,7 @@ def register(users: schemas.UserCreate, db: Session):
         first_name=users.first_name,
         last_name=users.last_name,
         email=users.email,
-        password=hashing.bcrypt(users.password),
+        password=hashing.hash_password(users.password),
     )
     check_email = (
         db.query(models.User).filter(models.User.email == new_user.email).first()
