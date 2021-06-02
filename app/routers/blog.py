@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Depends, status
-from .. import schemas, database
+from .. import schemas, database, JWTtoken
 from sqlalchemy.orm import Session
 from ..actions import blog
 
@@ -14,7 +14,10 @@ def create_post(post: schemas.PostBase, db: Session = Depends(database.get_db)):
 
 
 @router.get("/", response_model=List[schemas.Post], status_code=status.HTTP_200_OK)
-def get_all_post(db: Session = Depends(database.get_db)):
+def get_all_post(
+    db: Session = Depends(database.get_db),
+    get_current_user: schemas.User = Depends(JWTtoken.get_current_user),
+):
     return blog.get_all(db)
 
 

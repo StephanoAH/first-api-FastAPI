@@ -12,6 +12,9 @@ email-validator = "*"
 passlib = "*"
 bcrypt = "*"
 python-dotenv = "*"
+python-jose = "*"
+cryptography = "*"
+python-multipart = "*"
 
 [dev-packages]
 
